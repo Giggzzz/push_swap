@@ -1,5 +1,5 @@
 SRCS = srcs/push_swap.c \
-	srcs/sorting/swap.c
+	srcs/sort_alg/swap.c
 
 OBJS = $(SRCS:.c=.o) 
 
@@ -7,7 +7,7 @@ NAME = push_swap
 
 CC = gcc -Wall -Wextra -Werror
 
-INCL = -I /includes
+INCL = -I includes
 
 .c.o:
 

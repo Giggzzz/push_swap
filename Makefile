@@ -6,12 +6,12 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/01/17 04:52:46 by gudias           ###   ########.fr        #
+#    Updated: 2022/01/21 08:16:44 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/push_swap.c \
-	srcs/sort_alg/swap.c
+SRCS = srcs/push_swap.c srcs/stack_utils.c srcs/check_args.c\
+	srcs/operations.c
 
 OBJS = $(SRCS:.c=.o) 
 
@@ -27,9 +27,11 @@ LIBFT = libft/libft.a
 
 all: $(NAME)
 
-$(NAME):
-	make -C libft
+$(NAME): $(LIBFT)
 	$(CC) $(INCL) $(SRCS) $(LIBFT) -o $(NAME)
+
+$(LIBFT):
+	make -C libft
 
 clean: 
 	rm -f $(OBJS)

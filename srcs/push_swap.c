@@ -6,58 +6,77 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/17 04:42:03 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/21 08:10:08 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-
-int	check_duplicate(char **argv)
-{
-	int	i;
-
-	while (*argv)
-	{
-		i = 1;
-		while (*(argv + i))
-		{	
-			if (ft_atoi(*argv) == ft_atoi(*(argv + i)))
-				return (1);
-			i++;
-		}
-		argv++;
-	}
-	return (0);	
-		
-}
-
-int	check_args(char **argv)
-{
-	while (*argv)
-	{
-		if (ft_strncmp(*argv, "0", 2) && !ft_atoi(*argv)) 
-			return (1);
-		argv++;	
-	}
-	return (0);
-}
+#include "push_swap.h"
 
 int	main(int argc, char **argv)
 {
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
 	if (argc > 2)
 	{
 		argv++;
-		if (check_args(argv))
-			ft_printf("wrong argument\n");
-		else if (check_duplicate(argv))
-			ft_printf("duplicate\n");
+		if (!check_args(argv))
+			return (0);
+		stack_a = init_stack(argv);
+		stack_b = init_stack(NULL);
+		if (!stack_a || !stack_b)
+			ft_putendl("init stack error");
 		else
-			ft_printf("nb ok\n");
-		while (*argv)
-		{	
-			ft_printf("%s\n", *argv);
-			argv++;
-		}
+		{
+			t_elem *elem_a = stack_a->top;
+			t_elem *elem_b = stack_b->top;
+			ft_printf("\nA\n");
+			while (elem_a)
+			{
+				ft_printf("%d\n", elem_a->value);
+				elem_a = elem_a->next;
+			}
+			ft_printf("\nB\n");
+			while (elem_b)
+			{
+				ft_printf("%d\n", elem_b->value);
+				elem_b = elem_b->next;
+			}
+			push(stack_b, stack_a);
+			rotate(stack_a);
+			push(stack_b, stack_a);
+			elem_a = stack_a->top;
+			elem_b = stack_b->top;
+			ft_printf("\nA\n");
+			while (elem_a)
+			{
+				ft_printf("%d\n", elem_a->value);
+				elem_a = elem_a->next;
+			}
+			ft_printf("\nB\n");
+			while (elem_b)
+			{
+				ft_printf("%d\n", elem_b->value);
+				elem_b = elem_b->next;
+			}
+			reverse_rotate(stack_a);
+			reverse_rotate(stack_a);
+			push(stack_a, stack_b);
+			elem_a = stack_a->top;
+			elem_b = stack_b->top;
+			ft_printf("\nA\n");
+			while (elem_a)
+			{
+				ft_printf("%d\n", elem_a->value);
+				elem_a = elem_a->next;
+			}
+			ft_printf("\nB\n");
+			while (elem_b)
+			{
+				ft_printf("%d\n", elem_b->value);
+				elem_b = elem_b->next;
+			}
+		}	
 	}
 	else
 		ft_putstr_fd("Bad args nb\n", 1);

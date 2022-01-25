@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/25 04:21:48 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/25 17:31:21 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 
 	elem_a = stack_a->top;
 	elem_b = stack_b->top;
-	ft_printf("\n  A\t  B\n");
-	ft_printf("----\t----\n");
+	ft_printf("\n\tA\t\t\tB\n");
+	ft_printf("-----------------\t-----------------\n");
 	while (elem_a || elem_b)
 	{
 		if (elem_a)
-			ft_printf("  %d\t", elem_a->value);
+			ft_printf("   %d\t\t\t", elem_a->value);
 		else
-			ft_printf("\t");
+			ft_printf("\t\t\t");
 		if (elem_b)
-			ft_printf("  %d\n", elem_b->value);
+			ft_printf("   %d\n", elem_b->value);
 		else
 			ft_printf("\n");
 		if (elem_a)

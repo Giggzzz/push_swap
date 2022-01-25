@@ -6,12 +6,12 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/01/21 08:16:44 by gudias           ###   ########.fr        #
+#    Updated: 2022/01/25 03:24:05 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/push_swap.c srcs/stack_utils.c srcs/check_args.c\
-	srcs/operations.c
+	srcs/operations.c srcs/sort.c
 
 OBJS = $(SRCS:.c=.o) 
 

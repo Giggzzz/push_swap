@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:53:40 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/21 08:13:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/25 04:28:23 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	swap(t_stack *stack)
 	tmp = stack->top->value;
 	stack->top->value = stack->top->next->value;
 	stack->top->next->value = tmp;
+	if (stack->id == 'A')
+		ft_putstr("sa ");
+	else
+		ft_putstr("sb ");
 }
 
 void	push(t_stack *dst_stack, t_stack *src_stack)
@@ -46,6 +50,10 @@ void	push(t_stack *dst_stack, t_stack *src_stack)
 		dst_stack->bot = elem;
 	elem->next = dst_stack->top;
 	dst_stack->top = elem;
+	if (dst_stack->id == 'A')
+		ft_putstr("pa ");
+	else
+		ft_putstr("pb ");
 }
 
 void	rotate(t_stack *stack)
@@ -61,6 +69,10 @@ void	rotate(t_stack *stack)
 	elem->prev = stack->bot;
 	elem->next = NULL;
 	stack->bot = elem;
+	if (stack->id == 'A')
+		ft_putstr("ra ");
+	else
+		ft_putstr("rb ");
 }
 
 void	reverse_rotate(t_stack *stack)
@@ -76,4 +88,8 @@ void	reverse_rotate(t_stack *stack)
 	elem->next = stack->top;
 	elem->prev = NULL;
 	stack->top = elem;
+	if (stack->id == 'A')
+		ft_putstr("rra ");
+	else
+		ft_putstr("rrb ");
 }

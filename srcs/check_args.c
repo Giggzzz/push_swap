@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 05:17:57 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/20 05:44:26 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/24 14:08:18 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,10 @@ static int	check_format(char **argv)
 
 int	check_args(char **argv)
 {
-	if (!check_format(argv))
+	if (!check_format(argv) || !check_duplicate(argv))
 	{
-		ft_printf("Wrong argument\n");
+		ft_putendl("Error");
 		return (0);
 	}
-	else if (!check_duplicate(argv))
-	{
-		ft_printf("duplicate\n");
-		return (0);
-	}
-	ft_printf("Args OK\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/21 08:10:08 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/25 04:19:36 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,68 +17,22 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	if (argc > 2)
+	if (argc > 1)
 	{
 		argv++;
 		if (!check_args(argv))
 			return (0);
-		stack_a = init_stack(argv);
-		stack_b = init_stack(NULL);
+		stack_a = init_stack(argv, 'A');
+		stack_b = init_stack(NULL, 'B');
 		if (!stack_a || !stack_b)
-			ft_putendl("init stack error");
+			ft_putendl("stack init Error");
 		else
 		{
-			t_elem *elem_a = stack_a->top;
-			t_elem *elem_b = stack_b->top;
-			ft_printf("\nA\n");
-			while (elem_a)
-			{
-				ft_printf("%d\n", elem_a->value);
-				elem_a = elem_a->next;
-			}
-			ft_printf("\nB\n");
-			while (elem_b)
-			{
-				ft_printf("%d\n", elem_b->value);
-				elem_b = elem_b->next;
-			}
-			push(stack_b, stack_a);
-			rotate(stack_a);
-			push(stack_b, stack_a);
-			elem_a = stack_a->top;
-			elem_b = stack_b->top;
-			ft_printf("\nA\n");
-			while (elem_a)
-			{
-				ft_printf("%d\n", elem_a->value);
-				elem_a = elem_a->next;
-			}
-			ft_printf("\nB\n");
-			while (elem_b)
-			{
-				ft_printf("%d\n", elem_b->value);
-				elem_b = elem_b->next;
-			}
-			reverse_rotate(stack_a);
-			reverse_rotate(stack_a);
-			push(stack_a, stack_b);
-			elem_a = stack_a->top;
-			elem_b = stack_b->top;
-			ft_printf("\nA\n");
-			while (elem_a)
-			{
-				ft_printf("%d\n", elem_a->value);
-				elem_a = elem_a->next;
-			}
-			ft_printf("\nB\n");
-			while (elem_b)
-			{
-				ft_printf("%d\n", elem_b->value);
-				elem_b = elem_b->next;
-			}
+		//start solving
+			print_stacks(stack_a, stack_b);
+			sort(stack_a, stack_b);
+			print_stacks(stack_a, stack_b);	
 		}	
 	}
-	else
-		ft_putstr_fd("Bad args nb\n", 1);
 	return (0);
 }

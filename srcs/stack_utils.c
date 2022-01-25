@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/21 06:15:53 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/25 04:21:48 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,23 @@ static t_stack	*fill_stack(t_stack *stack, char **values)
 		if (!newelem)
 			return (NULL);
 		newelem->value = ft_atoi(*values);
-		newelem->prev = NULL;
-		newelem->next = stack->top;
-		stack->top->prev = newelem;
-		stack->top = newelem;
+		newelem->prev = stack->bot;
+		newelem->next = NULL;
+		stack->bot->next = newelem;
+		stack->bot = newelem;
 		values++;
 	}
 	return (stack);
 }
 
-t_stack	*init_stack(char **values)
+t_stack	*init_stack(char **values, char id)
 {
 	t_stack	*stack;
 
 	stack = malloc (sizeof (t_stack));
 	if (!stack)
 		return (NULL);
+	stack->id = id;
 	if (values)
 		stack = fill_stack(stack, values);
 	else
@@ -54,5 +55,29 @@ t_stack	*init_stack(char **values)
 	return (stack);
 }
 
+void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+{
+	t_elem *elem_a;
+	t_elem *elem_b;
 
+	elem_a = stack_a->top;
+	elem_b = stack_b->top;
+	ft_printf("\n  A\t  B\n");
+	ft_printf("----\t----\n");
+	while (elem_a || elem_b)
+	{
+		if (elem_a)
+			ft_printf("  %d\t", elem_a->value);
+		else
+			ft_printf("\t");
+		if (elem_b)
+			ft_printf("  %d\n", elem_b->value);
+		else
+			ft_printf("\n");
+		if (elem_a)
+			elem_a = elem_a->next;
+		if (elem_b)
+			elem_b = elem_b->next;
+	}
+}
 

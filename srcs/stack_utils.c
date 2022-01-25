@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/25 17:31:21 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/25 21:06:38 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 		if (elem_b)
 			elem_b = elem_b->next;
 	}
+	ft_printf("\n");
 }
 

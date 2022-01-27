@@ -6,39 +6,46 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/01/25 03:24:05 by gudias           ###   ########.fr        #
+#    Updated: 2022/01/27 02:21:57 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/push_swap.c srcs/stack_utils.c srcs/check_args.c\
-	srcs/operations.c srcs/sort.c
+NAME	= push_swap
 
-OBJS = $(SRCS:.c=.o) 
+CC	= gcc
+CFLAGS	= -Wall -Wextra -Werror
+INCL	= -I includes
+RM	= rm -f
 
-NAME = push_swap
+LIBFT	= libft/libft.a
 
-CC = gcc -Wall -Wextra -Werror
+SRCSDIR	= srcs
+OBJSDIR	= objs
 
-INCL = -I includes
+SRCS = push_swap.c stack_utils.c check_args.c \
+	operations/swap.c operations/push.c operations/rotate.c \
+	operations/reverse_rotate.c sort.c
 
-LIBFT = libft/libft.a
+OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
 
-.c.o:
+$(OBJSDIR)/%.o: srcs/%.c
+	mkdir -p $(OBJSDIR) $(OBJSDIR)/operations
+	$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(LIBFT)
-	$(CC) $(INCL) $(SRCS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(LIBFT):
 	make -C libft
 
 clean: 
-	rm -f $(OBJS)
+	$(RM) -r $(OBJSDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

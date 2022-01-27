@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/25 04:20:10 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/26 21:39:13 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@ typedef struct s_stack {
 }		t_stack;
 
 int	check_args(char **argv);
+
 t_stack	*init_stack(char **values, char id);
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 
-void	sort(t_stack *stack_a, t_stack *stack_b);
+t_bool	is_sorted(t_stack *stack);
+void	dummy_sort(t_stack *stack_a, t_stack *stack_b);
+void	quick_sort(t_stack *stack_a, t_stack *stack_b);
 
-void	swap(t_stack *stack);
+void	swap_stack(t_stack *stack);
+void	swap_both(t_stack *stack_a, t_stack *stack_b);
 void	push(t_stack *dst_stack, t_stack *src_stack);
-void	rotate(t_stack *stack);
-void	reverse_rotate(t_stack *stack);
+void	rotate_stack(t_stack *stack);
+void	rotate_both(t_stack *stack_a, t_stack *stack_b);
+void	reverse_rotate_stack(t_stack *stack);
+void	reverse_rotate_both(t_stack *stack_a, t_stack *stack_b);
 
 #endif

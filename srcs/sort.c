@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/27 06:45:44 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/28 07:49:01 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,162 @@ t_bool	is_sorted(t_stack *stack)
 	return (TRUE);
 }
 
-void dummy_sort(t_stack *stack_a, t_stack *stack_b)
+void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
+{
+	t_elem	*small_pivot;
+	t_elem	*big_pivot;
+
+	small_pivot = NULL;
+	big_pivot = NULL;
+	if (stack_a->top->next == pivot)
+	{
+		if (stack_a->top->value > pivot->value)
+			swap_stack(stack_a);
+	}
+	else
+	{
+		while (stack_a->top != pivot)
+		{
+			if (stack_a->top->value < pivot->value)
+			{
+				if (small_pivot == NULL)
+					small_pivot = stack_a->top;
+				push(stack_b, stack_a);
+			}
+			else
+			{
+				if (big_pivot == NULL)
+					big_pivot = stack_a->top;
+				rotate_stack(stack_a);
+			}
+		}
+		if (big_pivot != NULL)
+		{
+			push(stack_b, stack_a);
+			quicksort_a_rev(stack_a, stack_b, big_pivot);
+			push(stack_a, stack_b);
+		}
+		if (small_pivot != NULL)
+			quicksort_b(stack_a, stack_b, small_pivot);
+	}
+}
+
+void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
+{
+	t_elem	*small_pivot;
+	t_elem	*big_pivot;
+
+	small_pivot = NULL;
+	big_pivot = NULL;
+	
+	if (stack_a->top == pivot && pivot->next)
+	{
+		rotate_stack(stack_a);
+		quicksort_a(stack_a, stack_b, pivot);
+	}
+	else if (stack_a->top != pivot)
+	{
+		reverse_rotate_stack(stack_a);		
+		while (stack_a->top != pivot)
+		{
+			if (stack_a->top->value < pivot->value)
+			{
+				if (small_pivot == NULL)
+					small_pivot = stack_a->top;
+				push(stack_b, stack_a);
+			}
+			else
+				if (big_pivot == NULL)
+					big_pivot = stack_a->top;
+			reverse_rotate_stack(stack_a);
+		}
+		if (big_pivot != NULL)
+		{
+			push(stack_a, stack_b);
+			quicksort_a(stack_a, stack_b, big_pivot);
+			push(stack_b, stack_a);
+		}
+		if (small_pivot != NULL)
+			quicksort_b(stack_a, stack_b, small_pivot);
+	}	
+}
+
+void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
+{
+	t_elem	*small_pivot;
+	t_elem	*big_pivot;
+
+	small_pivot = NULL;
+	big_pivot = NULL;
+	if (stack_b->top->next == pivot)
+	{
+		if (stack_b->top->value < pivot->value)
+			swap_stack(stack_b);
+		push(stack_a, stack_b);
+		push(stack_a, stack_b);
+	}
+	else
+	{
+		while (stack_b->top != pivot)
+		{
+			if (stack_b->top->value > pivot->value)
+			{
+				if (big_pivot == NULL)
+					big_pivot = stack_b->top;
+				push(stack_a, stack_b);
+			}
+			else
+			{
+				if (small_pivot == NULL)
+					small_pivot = stack_b->top;
+				rotate_stack(stack_b);
+			}
+		}
+		if (big_pivot != NULL)
+			quicksort_a(stack_a, stack_b, big_pivot);
+		push(stack_a, stack_b);
+		if (small_pivot != NULL)
+			quicksort_b_rev(stack_a, stack_b, small_pivot);
+	}
+}
+
+void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
+{
+	t_elem	*small_pivot;
+	t_elem	*big_pivot;
+
+	small_pivot = NULL;
+	big_pivot = NULL;
+	if (stack_b->top == pivot && pivot->next)
+	{
+		rotate_stack(stack_b);
+		quicksort_b(stack_a, stack_b, pivot);
+	}
+	else if (stack_b->top != pivot)
+	{
+		reverse_rotate_stack(stack_b);		
+		while (stack_b->top != pivot)
+		{
+			if (stack_b->top->value > pivot->value)
+			{
+				if (big_pivot == NULL)
+					big_pivot = stack_b->top;
+				push(stack_a, stack_b);
+			}
+			else
+				if (small_pivot == NULL)
+					small_pivot = stack_b->top;
+			reverse_rotate_stack(stack_b);
+		}
+		if (big_pivot != NULL)
+			quicksort_a(stack_a, stack_b, big_pivot);
+		push(stack_a, stack_b);	
+		if (small_pivot != NULL)
+			quicksort_b(stack_a, stack_b, small_pivot);
+	}	
+}
+
+/*void dummy_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	ops;
 
@@ -59,47 +214,4 @@ void dummy_sort(t_stack *stack_a, t_stack *stack_b)
 		}
 	}
 	ft_printf("\n\nStack sorted! Took: %d\n", ops);
-}
-
-void	quick_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	t_elem	*pivot;
-
-	pivot = stack_a->top;
-	rotate_stack(stack_a);
-	while (stack_a->top != pivot)
-	{
-	//	print_stacks(stack_a, stack_b);
-		if (stack_a->top->value < pivot->value)
-			push(stack_b, stack_a);
-		else
-			rotate_stack(stack_a);
-	}
-	push(stack_b, stack_a);
-	if (stack_a->top != NULL && stack_a->top->next)
-	{
-		quick_sort(stack_a, stack_b);
-		quick_sort_rev(stack_a, stack_b);
-	}
-}
-
-void	quick_sort_rev(t_stack *stack_a, t_stack *stack_b)
-{
-	t_elem	*pivot;
-
-	pivot = stack_b->top;
-	rotate_stack(stack_b);
-	while (stack_b->top != pivot)
-	{
-		if (stack_b->top->value > pivot->value)
-			push(stack_a, stack_b);
-		else
-			rotate_stack(stack_b);
-	}
-	push(stack_a, stack_b);
-	if (stack_b->top != NULL && stack_b->top->next)
-	{
-		quick_sort_rev(stack_a, stack_b);
-		quick_sort(stack_a, stack_b);
-	}
-}
+}*/

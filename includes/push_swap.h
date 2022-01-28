@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/26 21:39:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/28 05:44:15 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 
 t_bool	is_sorted(t_stack *stack);
 void	dummy_sort(t_stack *stack_a, t_stack *stack_b);
-void	quick_sort(t_stack *stack_a, t_stack *stack_b);
+void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
+void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
+void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
+void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
 
 void	swap_stack(t_stack *stack);
 void	swap_both(t_stack *stack_a, t_stack *stack_b);

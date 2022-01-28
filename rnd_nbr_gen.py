@@ -6,7 +6,7 @@ try:
 	count = int(sys.argv[1])
 except:
 	count = 100
-list = random.sample(range(0, 500), count)
+list = random.sample(range(0, 100), count)
 text = ""
 for i in list:
 	text += str(i)

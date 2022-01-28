@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 21:10:40 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/26 21:18:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/01/28 04:11:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	reverse_rotate(t_stack *stack)
 {
 	t_elem *elem;
 
-	if (!stack->top || !stack->bot || !stack->bot->prev)
+	if (!stack->top || !stack->bot || stack->top == stack->bot)
 		return;
 	elem = stack->bot;
 	stack->bot = elem->prev;

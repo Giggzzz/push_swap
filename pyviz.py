@@ -1,14 +1,11 @@
-import os
-import matplotlib as mpl
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using non-interactive Agg backend')
-    mpl.use('Agg')
-import matplotlib.pyplot as plt
+#!/usr/bin/env python3
 
-from tkinter import*
+
+from tkinter import *
 import sys
 import time
 import subprocess
+import os
 from math import sqrt
 
 
@@ -29,7 +26,7 @@ You can decrease or increase the speed with the matching buttons.
 """
 
 
-RELATIVE_PATH = '../push_swap'
+RELATIVE_PATH = r'push_swap'
 
 
 class PsGui:

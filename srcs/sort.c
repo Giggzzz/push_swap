@@ -28,7 +28,7 @@ t_bool	is_sorted(t_stack *stack)
 
 int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 {
-	unsigned long long	pivot;
+	long long	pivot;
 	int		elem_count;
 	t_elem		*ptr;
 
@@ -89,9 +89,8 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		}
 		else
 		{
-			if (big_pivot == NULL)
-				big_pivot = stack_a->top;
-			rotate_stack(stack_a);
+			if (big_pivot != NULL)
+				rotate_stack(stack_a);
 		}
 		if (big_pivot != NULL)
 		{
@@ -137,13 +136,12 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		}
 		if (stack_a->top->value < median)
 		{
-			if (small_pivot == NULL)
-				small_pivot = stack_a->top;
-			push(stack_b, stack_a);
+			if (small_pivot != NULL)
+				push(stack_b, stack_a);
 		}
-		else
+	/*	else
 			if (big_pivot == NULL)
-				big_pivot = stack_a->top;
+				big_pivot = stack_a->top; */
 		if (big_pivot != NULL)
 		{
 		//	push(stack_a, stack_b);
@@ -190,8 +188,6 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		}
 		if (stack_b->top->value >= median)
 		{
-			if (big_pivot == NULL)
-				big_pivot = stack_b->top;
 			push(stack_a, stack_b);
 		}
 		else
@@ -240,8 +236,8 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		}
 		if (stack_b->top->value >= median)
 		{
-			if (big_pivot == NULL)
-				big_pivot = stack_b->top;
+		//	if (big_pivot == NULL)
+		//		big_pivot = stack_b->top;
 			push(stack_a, stack_b);
 		}
 		else

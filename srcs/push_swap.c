@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 		{
 			//print_stacks(stack_a, stack_b);
 			quicksort_a(stack_a, stack_b, stack_a->bot);
+			//dummy_sort(stack_a, stack_b);
 			//print_stacks(stack_a, stack_b);	
 		}	
 	}

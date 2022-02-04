@@ -32,6 +32,16 @@ static int	check_duplicate(char **argv)
 
 static int	check_format(char **argv)
 {
+	/*char **args;
+
+	
+	if (ft_strchr(argv[0], ' '))
+	{
+		ft_putendl("wowo");
+		args = ft_split(argv[0], ' ');
+	}
+	else
+		args = argv;*/
 	while (*argv)
 	{
 		if (!ft_isnumber(*argv))

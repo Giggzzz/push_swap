@@ -50,6 +50,11 @@ int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 	return (pivot / elem_count);
 }
 
+/*void	partition(t_stack *stack_a, t_stack *stack_b)
+{
+
+}*/
+
 void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 {
 	t_elem	*small_pivot;
@@ -251,11 +256,8 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	}	
 }
 
-/*void dummy_sort(t_stack *stack_a, t_stack *stack_b)
+void dummy_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int	ops;
-
-	ops = 0;
 	while (!is_sorted(stack_a))
 	{
 		while (stack_a->top != NULL && stack_a->top != stack_a->bot)
@@ -263,25 +265,18 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 			while (stack_a->top->next && stack_a->top->value < stack_a->top->next->value)
 			{
 				push(stack_b, stack_a);
-				ops++;
 			}
 			swap_stack(stack_a);
-			ops++;
 			push(stack_b, stack_a);
-			ops++;
 		}
 		while (stack_b->top != NULL && stack_b->top != stack_b->bot)
 		{
 			while (stack_b->top->next && stack_b->top->value > stack_b->top->next->value)
 			{
 				push(stack_a, stack_b);
-				ops++;
 			}
 			swap_stack(stack_b);
-			ops++;
 			push(stack_a, stack_b);
-			ops++;
 		}
 	}
-	ft_printf("\n\nStack sorted! Took: %d\n", ops);
-}*/
+}

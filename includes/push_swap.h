@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/28 05:44:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:04:42 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	check_args(char **argv);
 
 t_stack	*init_stack(char **values, char id);
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
+
+void	sort_3(t_stack *stack);
 
 t_bool	is_sorted(t_stack *stack);
 void	dummy_sort(t_stack *stack_a, t_stack *stack_b);

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/28 07:37:42 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/10 03:18:07 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	if (argc > 1)
 	{
 		argv++;
+		if (ft_strchr(*argv, ' '))
+			argv = ft_split(*argv, ' ');
 		if (!check_args(argv))
 			return (0);
 		stack_a = init_stack(argv, 'A');
@@ -28,10 +30,7 @@ int	main(int argc, char **argv)
 			ft_putendl("stack init Error");
 		else
 		{
-			//print_stacks(stack_a, stack_b);
 			quicksort_a(stack_a, stack_b, stack_a->bot);
-			//dummy_sort(stack_a, stack_b);
-			//print_stacks(stack_a, stack_b);	
 		}	
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/25 21:06:38 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/10 03:21:27 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_stack	*fill_stack(t_stack *stack, char **values)
 	t_elem	*newelem;
 
 		stack->bot = malloc (sizeof (t_elem));
+		if (!stack->bot)
+			return (NULL);
 		stack->bot->value = ft_atoi(*values);
 		stack->bot->prev = NULL;
 		stack->bot->next = NULL;
@@ -55,6 +57,21 @@ t_stack	*init_stack(char **values, char id)
 	return (stack);
 }
 
+t_bool	is_sorted(t_stack *stack)
+{
+	t_elem	*ptr;
+
+	ptr = stack->top;
+	while (ptr->next)
+	{
+		if (ptr->value > ptr->next->value)
+			return (FALSE);
+		ptr = ptr->next;
+	}
+	return (TRUE);
+}
+
+//RM
 void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	t_elem *elem_a;

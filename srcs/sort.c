@@ -6,25 +6,11 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/28 07:49:01 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/10 03:50:55 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_bool	is_sorted(t_stack *stack)
-{
-	t_elem	*ptr;
-
-	ptr = stack->top;
-	while (ptr->next)
-	{
-		if (ptr->value > ptr->next->value)
-			return (FALSE);
-		ptr = ptr->next;
-	}
-	return (TRUE);
-}
 
 int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 {
@@ -68,6 +54,8 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		if (stack_a->top->value > pivot->value)
 			swap_stack(stack_a);
 	}
+	else if (stack_a->top->next && stack_a->top->next->next == pivot)
+		sort_3(stack_a);
 	else
 	{
 		median = calc_pivot(stack_a, pivot, FALSE);
@@ -119,7 +107,8 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	
 	if (stack_a->top == pivot && pivot->next)
 	{
-		rotate_stack(stack_a);
+		//rotate_stack(stack_a);
+		pivot = stack_a->bot;
 		quicksort_a(stack_a, stack_b, pivot);
 	}
 	else if (stack_a->top != pivot)
@@ -219,7 +208,8 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	big_pivot = NULL;
 	if (stack_b->top == pivot && pivot->next)
 	{
-		rotate_stack(stack_b);
+		//rotate_stack(stack_b);
+		pivot = stack_b->bot;
 		quicksort_b(stack_a, stack_b, pivot);
 	}
 	else if (stack_b->top != pivot)

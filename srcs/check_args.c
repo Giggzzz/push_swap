@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 05:17:57 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/24 14:08:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/10 03:20:52 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ static int	check_duplicate(char **argv)
 
 static int	check_format(char **argv)
 {
-	/*char **args;
-
-	
-	if (ft_strchr(argv[0], ' '))
-	{
-		ft_putendl("wowo");
-		args = ft_split(argv[0], ' ');
-	}
-	else
-		args = argv;*/
 	while (*argv)
 	{
 		if (!ft_isnumber(*argv))

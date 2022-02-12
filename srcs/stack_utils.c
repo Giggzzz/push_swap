@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/10 03:21:27 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/11 22:56:56 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,29 @@ t_stack	*init_stack(char **values, char id)
 	return (stack);
 }
 
-t_bool	is_sorted(t_stack *stack)
+int	chunk_size(t_stack *stack, t_elem *chunk_end)
+{
+	int	size;
+	t_elem	*ptr;
+
+	if (!stack->top || !chunk_end)
+		return (0);
+	size = 1;
+	ptr = stack->top;
+	while (ptr != chunk_end && ptr->next)
+	{
+		size++;
+		ptr = ptr->next;
+	}	
+	return (size);
+}
+
+t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end)
 {
 	t_elem	*ptr;
 
-	ptr = stack->top;
-	while (ptr->next)
+	ptr = chunk_start;
+	while (ptr->next && ptr != chunk_end)
 	{
 		if (ptr->value > ptr->next->value)
 			return (FALSE);

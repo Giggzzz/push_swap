@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/02/09 18:05:24 by gudias           ###   ########.fr        #
+#    Updated: 2022/02/11 20:10:17 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ LIBFT	= libft/libft.a
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS = push_swap.c stack_utils.c check_args.c \
-	operations/swap.c operations/push.c operations/rotate.c \
-	operations/reverse_rotate.c sort.c sort_3.c
+SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
+	operations/reverse_rotate.c \
+	push_swap.c stack_utils.c check_args.c sort.c sort_3.c
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
 

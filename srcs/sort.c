@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/12 05:29:23 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/15 20:34:06 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,30 @@ int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 	return (pivot / elem_count);
 }
 
-void	partition(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
+void	partition(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end, int chunk_size)
 {
-	(void)	stack_a;
-	(void)	stack_b;
-	(void)	chunk_end;
-/*	int	median;
-	t_elem	*small_chunk;
-	t_elem	*big_chunk;
+	int	median;
+	int	small_chunk;
+	int	big_chunk;
 	
-	small_chunk = NULL;
-	big_chunk = NULL;
+	small_chunk = 0;
+	big_chunk = 0;
 	median = calc_pivot(stack_a, chunk_end, FALSE);
-	while (stack_a->top != chunk_end)
+	while (size-- > 0)
 	{
-	
-	}*/
+		if (stack_a->top->value < median)
+		{
+			push(stack_b, stack_a);
+			small_chunk++;
+		}
+		else
+		{
+			rotate_stack(stack_a);
+			big_chunk++;
+		}
+	}
+	quicksort_a_rev(stack_a, stack_b, big_chunk);
+	quicksort_b(stack_a, stack_b, small_chunk);
 }
 
 void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
@@ -66,7 +74,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 		sort_3(stack_a);
 	else if (!is_sorted(stack_a->top, chunk_end))
 	{
-		//partition(stack_a, stack_b, chunk_end);
+		//partition(stack_a, stack_b, chunk_end, chunksize);
 		quicksort_a(stack_a, stack_b, chunk_end);
 	}
 	
@@ -99,9 +107,9 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				rotate_stack(stack_a);
 			}
 		}
-		if (big_chunk)
+//		if (big_chunk)
 			quicksort_a_rev(stack_a, stack_b, big_chunk);
-		if (small_chunk)
+//		if (small_chunk)
 			quicksort_b(stack_a, stack_b, small_chunk);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/15 20:34:06 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/16 03:48:11 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,39 @@ int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 	while (ptr != chunk_limit)
 	{
 		pivot += ptr->value;
-		elem_count ++;
+		elem_count++;
 		if (!rev)
 			ptr = ptr->next;
 		else
 			ptr = ptr->prev;
 	}
-	//ft_printf("mid: %d\n", pivot/elem_count);
 	return (pivot / elem_count);
 }
 
-void	partition(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end, int chunk_size)
+int	calc_pivot2(t_stack *stack, int chunk_size, t_bool rev)
+{
+	long long	total;
+	int		size;
+	t_elem		*ptr;
+
+	if (!rev)
+		ptr = stack->top;
+	else
+		ptr = stack->bot;
+	total = 0;
+	size = chunk_size;
+	while (size-- > 0)
+	{
+		total += ptr->value;
+		if (!rev)
+			ptr = ptr->next;
+		else
+			ptr = ptr->prev;
+	}
+	return (total / chunk_size);
+}
+
+void	partition(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 {
 	int	median;
 	int	small_chunk;
@@ -45,8 +67,8 @@ void	partition(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end, int chunk_
 	
 	small_chunk = 0;
 	big_chunk = 0;
-	median = calc_pivot(stack_a, chunk_end, FALSE);
-	while (size-- > 0)
+	median = calc_pivot2(stack_a, chunk_size, FALSE);
+	while (chunk_size-- > 0)
 	{
 		if (stack_a->top->value < median)
 		{
@@ -59,8 +81,8 @@ void	partition(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end, int chunk_
 			big_chunk++;
 		}
 	}
-	quicksort_a_rev(stack_a, stack_b, big_chunk);
-	quicksort_b(stack_a, stack_b, small_chunk);
+	//quicksort_a_rev(stack_a, stack_b, big_chunk);
+	//quicksort_b(stack_a, stack_b, small_chunk);
 }
 
 void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
@@ -74,7 +96,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 		sort_3(stack_a);
 	else if (!is_sorted(stack_a->top, chunk_end))
 	{
-		//partition(stack_a, stack_b, chunk_end, chunksize);
+		//partition(stack_a, stack_b, chunksize);
 		quicksort_a(stack_a, stack_b, chunk_end);
 	}
 	

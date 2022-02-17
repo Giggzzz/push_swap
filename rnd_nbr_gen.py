@@ -1,7 +1,7 @@
 import random
 import sys
-min_nb = -2147483648
-max_nb = 2147483647
+min_nb = -1000
+max_nb = 1000
 try:
 	count = int(sys.argv[1])
 except:

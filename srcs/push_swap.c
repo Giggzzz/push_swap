@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/11 15:47:51 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/17 02:33:43 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		stack_a = init_stack(argv, 'A');
 		stack_b = init_stack(NULL, 'B');
 		if (!stack_a || !stack_b)
-			ft_putendl("stack init Error");
+			ft_putendl("Error");
 		else
 		{
 			quicksort_a(stack_a, stack_b, stack_a->bot);

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/19 05:47:57 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/19 06:08:14 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	calc_mid2(t_stack *stack, int chunk_size, int median)
 	count = 0;
 	while (chunk_size-- > 0)
 	{
-		if (stack->top->value < median)
+		if (ptr->value < median)
 		{
 			total += ptr->value;
 			count++;

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/19 05:17:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/19 05:47:57 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ int	calc_pivot(t_stack *stack, t_elem *chunk_limit, t_bool rev)
 	return (pivot / elem_count);
 }
 
+int	calc_mid2(t_stack *stack, int chunk_size, int median)
+{
+	long long	total;
+	int		count;
+	t_elem		*ptr;
+
+	ptr = stack->top;
+	total = 0;
+	count = 0;
+	while (chunk_size-- > 0)
+	{
+		if (stack->top->value < median)
+		{
+			total += ptr->value;
+			count++;
+		}
+		ptr = ptr->next;
+	}
+	if (count)
+		return (total / count);
+	else
+		return (0);
+}
+
 int	calc_pivot2(t_stack *stack, int chunk_size, t_bool rev)
 {
 	long long	total;
@@ -48,7 +72,7 @@ int	calc_pivot2(t_stack *stack, int chunk_size, t_bool rev)
 		ptr = stack->bot;
 	total = 0;
 	size = chunk_size;
-	while (size-- > 0)
+	while (chunk_size-- > 0)
 	{
 		total += ptr->value;
 		if (!rev)
@@ -56,7 +80,7 @@ int	calc_pivot2(t_stack *stack, int chunk_size, t_bool rev)
 		else
 			ptr = ptr->prev;
 	}
-	return (total / chunk_size);
+	return (total / size);
 }
 
 void	partition(t_stack *stack_a, t_stack *stack_b, int chunk_size)
@@ -114,7 +138,10 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 	small_small_chunk = NULL;
 
 	int size = chunk_size(stack_a, chunk_end);
+
+	int mid2;
 		median = calc_pivot(stack_a, chunk_end, FALSE);
+	mid2 = calc_mid2(stack_a, size, median);
 		//while (stack_a->top != chunk_end)
 		while(size-- != 0)
 		{
@@ -124,7 +151,7 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				//	small_chunk = stack_a->top;
 				push(stack_b, stack_a);
 				//
-			//	if (stack_b->top->value <= median/2 && stack_a->top->value >= median && size > 0)
+			//	if (stack_b->top->value <= mid2 && stack_a->top->value >= median && size > 0)
 			//	{
 					//ft_putendl("yes");
 					//if (!big_chunk)
@@ -136,7 +163,7 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 					//rotate_stack(stack_b);	
 					//size--;
 			//	}
-				if (stack_b->top->value < median/2)
+				if (stack_b->top->value < mid2)
 				{
 					//ft_putendl("ok2");
 					if (!small_small_chunk)

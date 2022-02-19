@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/19 06:08:14 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/19 06:30:53 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,19 +151,19 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				//	small_chunk = stack_a->top;
 				push(stack_b, stack_a);
 				//
-			//	if (stack_b->top->value <= mid2 && stack_a->top->value >= median && size > 0)
-			//	{
+				if (size  > 0 && stack_b->top->value < mid2 && stack_a->top->value >= median)
+				{
 					//ft_putendl("yes");
-					//if (!big_chunk)
-					//	big_chunk = stack_a->top;
-					//if (!small_small_chunk)
-					//	small_small_chunk = stack_b->top;
-					//rotate_both(stack_a, stack_b);
+					if (!big_chunk)
+						big_chunk = stack_a->top;
+					if (!small_small_chunk)
+						small_small_chunk = stack_b->top;
+					rotate_both(stack_a, stack_b);
 					//rotate_stack(stack_a);
 					//rotate_stack(stack_b);	
-					//size--;
-			//	}
-				if (stack_b->top->value < mid2)
+					size--;
+				}
+				else if (stack_b->top->value < mid2)
 				{
 					//ft_putendl("ok2");
 					if (!small_small_chunk)

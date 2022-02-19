@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/16 03:48:11 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/19 02:58:52 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,12 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 {
 	t_elem	*small_chunk;
 	t_elem	*big_chunk;
+	t_elem	*small_small_chunk;
 	int	median;
 
 	small_chunk = NULL;
 	big_chunk = NULL;
+	small_small_chunk = NULL;
 
 	int size = chunk_size(stack_a, chunk_end);
 		median = calc_pivot(stack_a, chunk_end, FALSE);
@@ -121,6 +123,23 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				if (!small_chunk)
 					small_chunk = stack_a->top;
 				push(stack_b, stack_a);
+				//
+				if (stack_b->top->value < median/2 && stack_a->top->value > median && size > 0)
+				{
+					if (!big_chunk)
+						big_chunk = stack_a->top;
+					if (!small_small_chunk)
+						small_small_chunk = stack_b->top;
+					rotate_both(stack_a, stack_b);
+					size--;
+				}
+				else if (stack_b->top->value < median/2 && stack_b->top != stack_b->bot)
+				{
+					if (!small_small_chunk)
+						small_small_chunk = stack_b->top;
+					rotate_stack(stack_b);
+				}
+				//
 			}
 			else
 			{
@@ -133,6 +152,7 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 			quicksort_a_rev(stack_a, stack_b, big_chunk);
 //		if (small_chunk)
 			quicksort_b(stack_a, stack_b, small_chunk);
+			quicksort_b_rev(stack_a, stack_b, small_small_chunk);
 }
 
 void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)

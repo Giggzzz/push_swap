@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/19 02:58:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/19 05:17:52 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,26 +120,33 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 		{
 			if (stack_a->top->value < median)
 			{
-				if (!small_chunk)
-					small_chunk = stack_a->top;
+				//if (!small_chunk)
+				//	small_chunk = stack_a->top;
 				push(stack_b, stack_a);
 				//
-				if (stack_b->top->value < median/2 && stack_a->top->value > median && size > 0)
+			//	if (stack_b->top->value <= median/2 && stack_a->top->value >= median && size > 0)
+			//	{
+					//ft_putendl("yes");
+					//if (!big_chunk)
+					//	big_chunk = stack_a->top;
+					//if (!small_small_chunk)
+					//	small_small_chunk = stack_b->top;
+					//rotate_both(stack_a, stack_b);
+					//rotate_stack(stack_a);
+					//rotate_stack(stack_b);	
+					//size--;
+			//	}
+				if (stack_b->top->value < median/2)
 				{
-					if (!big_chunk)
-						big_chunk = stack_a->top;
+					//ft_putendl("ok2");
 					if (!small_small_chunk)
 						small_small_chunk = stack_b->top;
-					rotate_both(stack_a, stack_b);
-					size--;
+					if (stack_b->top != stack_b->bot)
+						rotate_stack(stack_b);
 				}
-				else if (stack_b->top->value < median/2 && stack_b->top != stack_b->bot)
-				{
-					if (!small_small_chunk)
-						small_small_chunk = stack_b->top;
-					rotate_stack(stack_b);
-				}
-				//
+				else if (!small_chunk)
+					small_chunk = stack_b->top;
+				///
 			}
 			else
 			{
@@ -148,10 +155,11 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				rotate_stack(stack_a);
 			}
 		}
-//		if (big_chunk)
+		//if (big_chunk)
 			quicksort_a_rev(stack_a, stack_b, big_chunk);
-//		if (small_chunk)
+		if (small_chunk)
 			quicksort_b(stack_a, stack_b, small_chunk);
+		if (small_small_chunk)
 			quicksort_b_rev(stack_a, stack_b, small_small_chunk);
 }
 

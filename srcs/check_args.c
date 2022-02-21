@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 05:17:57 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/10 03:20:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/21 09:09:59 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ static int	check_duplicate(char **argv)
 
 static int	check_format(char **argv)
 {
+	char	*checker;
+
 	while (*argv)
 	{
 		if (!ft_isnumber(*argv))
 			return (0);
 		if (**argv == '+')
 			(*argv)++;
-		if (ft_strlen(*argv) != ft_strlen(ft_itoa(ft_atoi(*argv))))
+		checker = ft_itoa(ft_atoi(*argv));
+		if (ft_strlen(*argv) != ft_strlen(checker))
 			return (0);
+		free(checker);
 		argv++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/17 19:32:13 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/21 08:51:37 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@ typedef struct s_stack {
 
 int	check_args(char **argv);
 
+void	free_stack(t_stack *stack);
+
 t_stack	*init_stack(char **values, char id);
 t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end);
+t_bool	is_rev_sorted(t_elem *chunk_start, t_elem *chunk_end);
 int	chunk_size(t_stack *stack, t_elem *chunk_end);
+//
+int	chunk_size_rev(t_stack *stack, t_elem *chunk_end);
 
 //RM
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);

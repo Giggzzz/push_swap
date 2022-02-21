@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/11 22:56:56 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/21 07:15:33 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,24 @@ t_stack	*init_stack(char **values, char id)
 	}
 	return (stack);
 }
+//////
+int	chunk_size_rev(t_stack *stack, t_elem *chunk_end)
+{
+	int	size;
+	t_elem	*ptr;
 
+	if (!stack->bot || !chunk_end)
+		return (0);
+	size = 1;
+	ptr = stack->bot;
+	while (ptr != chunk_end && ptr->prev)
+	{
+		size++;
+		ptr = ptr->prev;
+	}	
+	return (size);
+}
+/////////
 int	chunk_size(t_stack *stack, t_elem *chunk_end)
 {
 	int	size;
@@ -82,6 +99,20 @@ t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end)
 	while (ptr->next && ptr != chunk_end)
 	{
 		if (ptr->value > ptr->next->value)
+			return (FALSE);
+		ptr = ptr->next;
+	}
+	return (TRUE);
+}
+
+t_bool	is_rev_sorted(t_elem *chunk_start, t_elem *chunk_end)
+{
+	t_elem	*ptr;
+
+	ptr = chunk_start;
+	while (ptr->next && ptr != chunk_end)
+	{
+		if (ptr->value < ptr->next->value)
 			return (FALSE);
 		ptr = ptr->next;
 	}

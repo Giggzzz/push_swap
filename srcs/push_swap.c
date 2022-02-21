@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/19 05:16:21 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/21 08:54:49 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	main(int argc, char **argv)
 		{
 			sort(stack_a, stack_b, stack_a->bot);
 			//print_stacks(stack_a, stack_b);
-		}	
+		}
+		free_stack(stack_a);
+		free_stack(stack_b);	
 	}
 	return (0);
 }

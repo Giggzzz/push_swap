@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/02/17 02:42:59 by gudias           ###   ########.fr        #
+#    Updated: 2022/02/21 08:50:34 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ OBJSDIR	= objs
 
 SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
 	operations/reverse_rotate.c \
-	push_swap.c stack_utils.c check_args.c sort.c sort_3.c
+	push_swap.c stack_utils.c check_args.c sort.c sort_3.c \
+	memfree.c
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
 
@@ -51,4 +52,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re checker
+.PHONY: all clean fclean re

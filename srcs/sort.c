@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/21 08:23:27 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/21 23:21:12 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,8 +282,7 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 					small_pivot = stack_b->top;
 				///
 			}
-			else
-				if (big_pivot == NULL)
+			else if (big_pivot == NULL)
 					big_pivot = stack_a->top;
 			reverse_rotate_stack(stack_a);
 		}
@@ -348,7 +347,8 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	{
 		median = calc_pivot(stack_b, pivot, FALSE);
 		mid2 = calc_big_pivot(stack_b, size, median, FALSE);
-		while (stack_b->top != pivot)
+		//while (stack_b->top != pivot)
+		while (size--)
 		{
 			if (stack_b->top->value >= median)
 			{
@@ -356,7 +356,7 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				//	big_pivot = stack_b->top;
 				push(stack_a, stack_b);
 				//
-				if (size  > 0 && chunksize > 100 && stack_a->top->value < mid2 && stack_b->top->value < median)
+				if (size  > 0 && chunksize > 6 && stack_a->top->value < mid2 && stack_b->top->value < median)
 				{
 					//ft_putendl("yes");
 					if (!small_pivot)
@@ -368,7 +368,7 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 					//rotate_stack(stack_b);	
 					size--;
 				}
-				else if (chunksize > 100 && stack_a->top->value < mid2)
+				else if (chunksize > 6 && stack_a->top->value < mid2)
 				{
 					//ft_putendl("ok2");
 					if (!big_small_chunk)
@@ -386,12 +386,12 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 					small_pivot = stack_b->top;
 				rotate_stack(stack_b);
 			}
-			size--;
+			//size--;
 		}
-		if (stack_b->top->value >= median)
+		/*if (stack_b->top->value >= median)
 		{
 			push(stack_a, stack_b);
-			if (chunksize > 100 && stack_a->top->value < mid2)
+			if (chunksize > 6 && stack_a->top->value < mid2)
 			{
 				//ft_putendl("ok2");
 				if (!big_small_chunk)
@@ -407,7 +407,7 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 			if (small_pivot == NULL)
 				small_pivot = stack_b->top;
 			rotate_stack(stack_b);
-		}
+		}*/
 		if (big_pivot != NULL)
 			sort(stack_a, stack_b, big_pivot);
 			//quicksort_a(stack_a, stack_b, big_pivot);

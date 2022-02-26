@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/21 08:54:49 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/25 22:11:02 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int argc, char **argv)
 			ft_putendl("Error");
 		else
 		{
-			sort(stack_a, stack_b, stack_a->bot);
+			sort_handler_a(stack_a, stack_b, stack_size(stack_a));
+			//sort(stack_a, stack_b, stack_a->bot);
 			//print_stacks(stack_a, stack_b);
 		}
 		free_stack(stack_a);

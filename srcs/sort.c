@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/21 23:21:12 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/23 07:45:56 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	partition(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 	small_chunk = 0;
 	big_chunk = 0;
 	median = calc_pivot2(stack_a, chunk_size, FALSE);
-	while (chunk_size-- > 0)
+	while (chunk_size--)
 	{
 		if (stack_a->top->value < median)
 		{
@@ -175,32 +175,24 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 	int	chunksize;
 	chunksize = size;
 	int mid2;
-		median = calc_pivot(stack_a, chunk_end, FALSE);
+	median = calc_pivot(stack_a, chunk_end, FALSE);
 	mid2 = calc_mid2(stack_a, size, median, FALSE);
-		//while (stack_a->top != chunk_end)
 		while(size--)
 		{
 			if (stack_a->top->value < median)
 			{
-				//if (!small_chunk)
-				//	small_chunk = stack_a->top;
 				push(stack_b, stack_a);
-				//
 				if (size  > 0 && chunksize > 5 && stack_b->top->value < mid2 && stack_a->top->value >= median)
 				{
-					//ft_putendl("yes");
 					if (!big_chunk)
 						big_chunk = stack_a->top;
 					if (!small_small_chunk)
 						small_small_chunk = stack_b->top;
 					rotate_both(stack_a, stack_b);
-					//rotate_stack(stack_a);
-					//rotate_stack(stack_b);	
 					size--;
 				}
 				else if (chunksize > 5 && stack_b->top->value < mid2)
 				{
-					//ft_putendl("ok2");
 					if (!small_small_chunk)
 						small_small_chunk = stack_b->top;
 					if (stack_b->top != stack_b->bot)
@@ -208,7 +200,6 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				}
 				else if (!small_chunk)
 					small_chunk = stack_b->top;
-				///
 			}
 			else
 			{
@@ -217,7 +208,7 @@ void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end)
 				rotate_stack(stack_a);
 			}
 		}
-		//if (big_chunk)
+		if (big_chunk)
 			quicksort_a_rev(stack_a, stack_b, big_chunk);
 		if (small_chunk)
 			quicksort_b(stack_a, stack_b, small_chunk);
@@ -245,14 +236,15 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	{
 		if (pivot->next) //si chunk > 1
 			sort(stack_a, stack_b, stack_a->bot);
-			//quicksort_a(stack_a, stack_b, stack_a->bot);
 	}
-	else if (pivot->next == stack_a->bot) //si chunk = 2
+	else if (chunksize == 2) //si chunk = 2
 	{
 		reverse_rotate_stack(stack_a);
 		reverse_rotate_stack(stack_a);
 		compare_2(stack_a);
 	}
+	else if (chunksize == 3)
+		sort_3_bot(stack_a, stack_b);
 	else if (is_sorted(pivot, stack_a->bot)) //si trié
 	{	
 		while (stack_a->top != pivot)
@@ -267,12 +259,9 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		{
 			if (stack_a->top->value < median)
 			{
-				//if (small_pivot == NULL)
-				//	small_pivot = stack_a->top;
 				push(stack_b, stack_a);
 				if (chunksize > 5 && stack_b->top->value < mid2)
 				{
-					//ft_putendl("ok2");
 					if (!small_small_chunk)
 						small_small_chunk = stack_b->top;
 					if (stack_b->top != stack_b->bot)
@@ -280,7 +269,6 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				}
 				else if (!small_pivot)
 					small_pivot = stack_b->top;
-				///
 			}
 			else if (big_pivot == NULL)
 					big_pivot = stack_a->top;
@@ -291,7 +279,6 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 			push(stack_b, stack_a);
 			if (chunksize > 5 && stack_b->top->value < mid2)
 			{
-				//ft_putendl("ok2");
 				if (!small_small_chunk)
 					small_small_chunk = stack_b->top;
 				if (stack_b->top != stack_b->bot)
@@ -301,14 +288,9 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				small_pivot = stack_b->top;
 		}
 
-		if (big_pivot != NULL)
-		{
-		//	push(stack_a, stack_b);
+		if (big_pivot)
 			sort(stack_a, stack_b, big_pivot);
-			//quicksort_a(stack_a, stack_b, big_pivot);
-		//	push(stack_b, stack_a);
-		}
-		if (small_pivot != NULL)
+		if (small_pivot)
 			quicksort_b(stack_a, stack_b, small_pivot);
 		if (small_small_chunk)
 			quicksort_b_rev(stack_a, stack_b, small_small_chunk);
@@ -338,39 +320,30 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	}
 	else if (stack_b->top->next == pivot)
 	{
-		if (stack_b->top->value < pivot->value)
-			swap_stack(stack_b);
 		push(stack_a, stack_b);
 		push(stack_a, stack_b);
+		compare_2(stack_a); 
 	}
 	else
 	{
 		median = calc_pivot(stack_b, pivot, FALSE);
 		mid2 = calc_big_pivot(stack_b, size, median, FALSE);
-		//while (stack_b->top != pivot)
 		while (size--)
 		{
 			if (stack_b->top->value >= median)
 			{
-				//if (big_pivot == NULL)
-				//	big_pivot = stack_b->top;
 				push(stack_a, stack_b);
-				//
 				if (size  > 0 && chunksize > 6 && stack_a->top->value < mid2 && stack_b->top->value < median)
 				{
-					//ft_putendl("yes");
 					if (!small_pivot)
 						small_pivot = stack_b->top;
 					if (!big_small_chunk)
 						big_small_chunk = stack_a->top;
 					rotate_both(stack_a, stack_b);
-					//rotate_stack(stack_a);
-					//rotate_stack(stack_b);	
 					size--;
 				}
 				else if (chunksize > 6 && stack_a->top->value < mid2)
 				{
-					//ft_putendl("ok2");
 					if (!big_small_chunk)
 						big_small_chunk = stack_a->top;
 					if (stack_a->top != stack_a->bot)
@@ -378,43 +351,19 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				}
 				else if (!big_pivot)
 					big_pivot = stack_a->top;
-				//
 			}
 			else
 			{
-				if (small_pivot == NULL)
+				if (!small_pivot)
 					small_pivot = stack_b->top;
 				rotate_stack(stack_b);
 			}
-			//size--;
 		}
-		/*if (stack_b->top->value >= median)
-		{
-			push(stack_a, stack_b);
-			if (chunksize > 6 && stack_a->top->value < mid2)
-			{
-				//ft_putendl("ok2");
-				if (!big_small_chunk)
-					big_small_chunk = stack_a->top;
-				if (stack_a->top != stack_a->bot)
-					rotate_stack(stack_a);
-			}
-			else if (!big_pivot)
-				big_pivot = stack_a->top;
-		}
-		else
-		{
-			if (small_pivot == NULL)
-				small_pivot = stack_b->top;
-			rotate_stack(stack_b);
-		}*/
-		if (big_pivot != NULL)
+		if (big_pivot)
 			sort(stack_a, stack_b, big_pivot);
-			//quicksort_a(stack_a, stack_b, big_pivot);
 		if (big_small_chunk)
 			quicksort_a_rev(stack_a, stack_b, big_small_chunk);
-		//push(stack_a, stack_b);
-		if (small_pivot != NULL)
+		if (small_pivot)
 			quicksort_b_rev(stack_a, stack_b, small_pivot);
 	}
 }
@@ -439,6 +388,14 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 	{
 		quicksort_b(stack_a, stack_b, stack_b->bot);
 	}
+	else if (is_sorted(pivot, stack_b->bot))
+	{
+		while (size--)
+		{
+			reverse_rotate_stack(stack_b);
+			push(stack_a, stack_b);
+		}
+	}
 	else if (stack_b->top != pivot)
 	{	
 		median = calc_pivot(stack_b, pivot, TRUE);
@@ -448,12 +405,9 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 		{
 			if (stack_b->top->value >= median)
 			{
-				//if (big_pivot == NULL)
-				//	big_pivot = stack_b->top;
 				push(stack_a, stack_b);
 				if (chunksize > 6 && stack_a->top->value < mid2)
 				{
-					//ft_putendl("ok2");
 					if (!big_small_chunk)
 						big_small_chunk = stack_a->top;
 					if (stack_a->top != stack_a->bot)
@@ -462,7 +416,7 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				else if (!big_pivot)
 					big_pivot = stack_a->top;
 			}
-			else if (small_pivot == NULL)
+			else if (!small_pivot)
 				small_pivot = stack_b->top;
 			reverse_rotate_stack(stack_b);
 		}
@@ -471,7 +425,6 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 			push(stack_a, stack_b);
 			if (chunksize > 6 && stack_a->top->value < mid2)
 			{
-				//ft_putendl("ok2");
 				if (!big_small_chunk)
 					big_small_chunk = stack_a->top;
 				if (stack_a->top != stack_a->bot)
@@ -481,43 +434,15 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot)
 				big_pivot = stack_a->top;
 		}
 		else
-			if (small_pivot == NULL)
+			if (!small_pivot)
 				small_pivot = stack_b->top;
 
-		if (big_pivot != NULL)
+		if (big_pivot)
 			sort(stack_a, stack_b, big_pivot);
-			//quicksort_a(stack_a, stack_b, big_pivot);
 		if (big_small_chunk)
 			quicksort_a_rev(stack_a, stack_b, big_small_chunk);
-		//push(stack_a, stack_b);	
-		if (small_pivot != NULL)
+		if (small_pivot)
 			quicksort_b(stack_a, stack_b, small_pivot);
 	}	
 }
 
-
-/*RM
-void dummy_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	while (!is_sorted(stack_a))
-	{
-		while (stack_a->top != NULL && stack_a->top != stack_a->bot)
-		{
-			while (stack_a->top->next && stack_a->top->value < stack_a->top->next->value)
-			{
-				push(stack_b, stack_a);
-			}
-			swap_stack(stack_a);
-			push(stack_b, stack_a);
-		}
-		while (stack_b->top != NULL && stack_b->top != stack_b->bot)
-		{
-			while (stack_b->top->next && stack_b->top->value > stack_b->top->next->value)
-			{
-				push(stack_a, stack_b);
-			}
-			swap_stack(stack_b);
-			push(stack_a, stack_b);
-		}
-	}
-}*/

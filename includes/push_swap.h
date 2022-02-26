@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/21 08:51:37 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/25 21:57:32 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ typedef struct s_stack {
 int	check_args(char **argv);
 
 void	free_stack(t_stack *stack);
-
 t_stack	*init_stack(char **values, char id);
+
+int	stack_size(t_stack *stack);
+
+t_bool	is_sorted_a(t_elem *chunk_start, int chunksize);
+t_bool	is_sorted_b(t_elem *chunk_start, int chunksize);
+t_bool	is_sorted_bot(t_elem *chunk_start, int chunksize);
+
+
 t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end);
 t_bool	is_rev_sorted(t_elem *chunk_start, t_elem *chunk_end);
 int	chunk_size(t_stack *stack, t_elem *chunk_end);
@@ -40,18 +47,35 @@ int	chunk_size_rev(t_stack *stack, t_elem *chunk_end);
 
 //RM
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
-void	dummy_sort(t_stack *stack_a, t_stack *stack_b);
 
-void	sort_3(t_stack *stack);
-void	compare_2(t_stack *stack);
-
+//
 void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end);
 
+void	compare_2(t_stack *stack);
+void	sort_3(t_stack *stack);
+void	sort_3_bot(t_stack *stack_a, t_stack *stack_b);
+void	sort_3_bot_b(t_stack *stack_a, t_stack *stack_b);
+
+void	sort_handler_a(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	sort_handler_a_bot(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	sort_handler_b(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	sort_handler_b_bot(t_stack *stack_a, t_stack *stack_b, int chunksize);
+
+int	calc_mid_pivot(t_stack *stack, int chunksize, t_bool rev);
+int	calc_small_pivot(t_stack *stack, int chunksize, int median, t_bool rev);
+int	calc_big_pivot(t_stack *stack, int chunksize, int median, t_bool rev);
+
+void	quicksort_a(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	quicksort_b(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, int chunksize);
+
+/*
 void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
 void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
 void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
 void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
-
+*/
 void	swap_stack(t_stack *stack);
 void	swap_both(t_stack *stack_a, t_stack *stack_b);
 void	push(t_stack *dst_stack, t_stack *src_stack);

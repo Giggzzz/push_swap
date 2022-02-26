@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/21 07:15:33 by gudias           ###   ########.fr       */
+/*   Updated: 2022/02/25 20:11:17 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static t_stack	*fill_stack(t_stack *stack, char **values)
 {
 	t_elem	*newelem;
 
-		stack->bot = malloc (sizeof (t_elem));
-		if (!stack->bot)
-			return (NULL);
-		stack->bot->value = ft_atoi(*values);
-		stack->bot->prev = NULL;
-		stack->bot->next = NULL;
-		stack->top = stack->bot;
-		values++;
+	stack->bot = malloc (sizeof (t_elem));
+	if (!stack->bot)
+		return (NULL);
+	stack->bot->value = ft_atoi(*values);
+	stack->bot->prev = NULL;
+	stack->bot->next = NULL;
+	stack->top = stack->bot;
+	values++;
 	while (*values)
 	{
 		newelem = malloc (sizeof (t_elem));
@@ -56,7 +56,69 @@ t_stack	*init_stack(char **values, char id)
 	}
 	return (stack);
 }
-//////
+
+int	stack_size(t_stack *stack)
+{
+	int	size;
+	t_elem	*ptr;
+
+	if (!stack)
+		return (0);
+	size = 0;
+	ptr = stack->top;
+	while (ptr)
+	{
+		size++;
+		ptr = ptr->next;
+	}
+	return (size);
+}
+
+t_bool	is_sorted_a(t_elem *chunk_start, int chunksize)
+{
+	t_elem	*ptr;
+
+	ptr = chunk_start;
+	while (chunksize-- > 1)
+	{
+		if (ptr->value > ptr->next->value)
+			return (FALSE);
+		ptr = ptr->next;
+	}
+	return (TRUE);
+
+}
+
+t_bool	is_sorted_b(t_elem *chunk_start, int chunksize)
+{
+	t_elem	*ptr;
+
+	ptr = chunk_start;
+	while (chunksize-- > 1)
+	{
+		if (ptr->value < ptr->next->value)
+			return (FALSE);
+		ptr = ptr->next;	
+	}
+	return (TRUE);
+}
+
+t_bool	is_sorted_bot(t_elem *chunk_start, int chunksize)
+{
+	t_elem	*ptr;
+
+	ptr = chunk_start;
+	while (chunksize-- > 1)
+	{
+		if (ptr->value < ptr->prev->value)
+			return (FALSE);
+		ptr = ptr->prev;
+	}
+	return (TRUE);
+
+}
+
+/////
 int	chunk_size_rev(t_stack *stack, t_elem *chunk_end)
 {
 	int	size;

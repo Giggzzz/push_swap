@@ -6,58 +6,43 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:55:39 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/26 03:29:22 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/01 05:34:52 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	subdivide(t_stack *stack_a, int chunksize, int *big_chunk, int *big_small_chunk, int mid2)
+static void	subdivide(t_stack *stack_a, t_chunk_helper *chunk_helper)
 {
-	if (chunksize > 6 && stack_a->top->value < mid2)
+	if (chunk_helper->size > 6 && stack_a->top->value < chunk_helper->mid2)
 	{
-		(*big_small_chunk)++;
+		chunk_helper->sub_chunk++;
 		if (stack_a->top != stack_a->bot)
 			rotate_stack(stack_a);
 	}
 	else
-		(*big_chunk)++;
+		chunk_helper->big_chunk++;
 }
 
 void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, int chunksize)
 {
-	int	small_chunk;
-	int	big_chunk;
-	int	big_small_chunk;
-	int	median;
-	int	big_median;
-	int	size;
+	t_chunk_helper	*chunk_helper;
+	int		curr_size;
 
-	small_chunk = 0;
-	big_chunk = 0;
-	big_small_chunk = 0;
-	size = chunksize;
-
-	median = calc_mid_pivot(stack_b, size, TRUE);
-	big_median = calc_big_pivot(stack_b, size, median, TRUE); 
-
-	while (size--)
+	chunk_helper = init_chunk_helper(stack_b, chunksize);
+	curr_size = chunksize;
+	chunk_helper->pivot = calc_mid_pivot(stack_b, curr_size, TRUE);
+	chunk_helper->mid2 = calc_big_pivot(stack_b, curr_size, chunk_helper->pivot, TRUE);
+	while (curr_size--)
 	{
 		reverse_rotate_stack(stack_b);
-
-		if (stack_b->top->value >= median)
+		if (stack_b->top->value >= chunk_helper->pivot)
 		{
 			push(stack_a, stack_b);
-			subdivide(stack_a, chunksize, &big_chunk, &big_small_chunk, big_median);
+			subdivide(stack_a, chunk_helper);
 		}
 		else
-			small_chunk++;
+			chunk_helper->small_chunk++;
 	}
-
-	if (big_chunk)
-		sort_handler_a(stack_a, stack_b, big_chunk);
-	if (big_small_chunk)
-		sort_handler_a_bot(stack_a, stack_b, big_small_chunk);
-	if (small_chunk)
-		sort_handler_b(stack_a, stack_b, small_chunk);
+	quicksort_next(stack_a, stack_b, chunk_helper, TRUE);
 }	

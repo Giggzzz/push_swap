@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:41:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/23 07:45:00 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/01 05:35:41 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,30 +105,6 @@ void	sort_3_bot_b(t_stack *stack_a, t_stack *stack_b)
 	while (pushed++ < 3)
 		push(stack_a, stack_b);
 }
-
-/*void	sort_3(t_stack *stack)
-{
-	t_elem	*max;
-
-	max = find_max(stack);
-	if (max == stack->top)
-	{
-		if (stack->top->next->next != stack->bot)
-		{
-			move_max_down(stack);
-		}
-		else
-			rotate_stack(stack);
-	}
-	else if (max == stack->top->next)
-	{
-		if (stack->top->next->next != stack->bot)
-			move_max_down(stack);
-		else
-			reverse_rotate_stack(stack);
-	}
-	compare_2(stack);
-}*/
 
 void	compare_2(t_stack *stack)
 {

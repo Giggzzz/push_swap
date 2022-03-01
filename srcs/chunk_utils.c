@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   chunk_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 23:53:40 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:30:49 by gudias           ###   ########.fr       */
+/*   Created: 2022/03/01 02:25:35 by gudias            #+#    #+#             */
+/*   Updated: 2022/03/01 05:25:18 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(t_stack *stack)
+t_chunk_helper	*init_chunk_helper(t_stack *stack, int chunksize)
 {
-	int	tmp;
+	t_chunk_helper	*chunk_helper;
 
-	if (!stack->top || !stack->top->next)
-		return ;
-	tmp = stack->top->value;
-	stack->top->value = stack->top->next->value;
-	stack->top->next->value = tmp;
-}
-
-void	swap_stack(t_stack *stack)
-{
-	swap(stack);
-	if (stack->id == 'A')
-		ft_putendl("sa");
-	else
-		ft_putendl("sb");
-}
-
-void	swap_both(t_stack *stack_a, t_stack *stack_b)
-{
-	swap(stack_a);
-	swap(stack_b);
-	ft_putendl("ss");
+	chunk_helper = malloc (sizeof (t_chunk_helper));
+	if (!chunk_helper)
+		return (NULL);	
+	chunk_helper->stack = stack;
+	chunk_helper->size = chunksize;
+	chunk_helper->big_chunk = 0;
+	chunk_helper->small_chunk = 0;
+	chunk_helper->sub_chunk = 0;
+	return (chunk_helper);
 }

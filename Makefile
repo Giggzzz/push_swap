@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/02/26 04:01:34 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/01 02:51:47 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
 	push_swap.c stack_utils.c check_args.c sort_3.c \
 	memfree.c \
 	quicksort_a.c quicksort_a_rev.c quicksort_b.c quicksort_b_rev.c \
-	sort_handler.c sort_utils.c	
+	sort_handler.c sort_utils.c chunk_utils.c	
 #sort.c \ 
 
 

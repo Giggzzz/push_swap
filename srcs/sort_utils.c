@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:43:31 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/26 03:25:23 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/01 05:29:20 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	calc_mid_pivot(t_stack *stack, int chunk_size, t_bool rev)
 {
-	long long	total;
 	int		size;
 	t_elem		*ptr;
+	long long	total;
 
 	if (!rev)
 		ptr = stack->top;
@@ -26,8 +26,6 @@ int	calc_mid_pivot(t_stack *stack, int chunk_size, t_bool rev)
 	size = chunk_size;
 	while (size--)
 	{	
-		//ft_printf("size: %d, val: %d\n", size, ptr->value);
-		//print_stacks(stack, stack);
 		total += ptr->value;
 		if (!rev)
 			ptr = ptr->next;
@@ -39,9 +37,9 @@ int	calc_mid_pivot(t_stack *stack, int chunk_size, t_bool rev)
 
 int	calc_small_pivot(t_stack *stack, int chunk_size, int median, t_bool rev)
 {
-	long long	total;
 	int		count;
 	t_elem		*ptr;
+	long long	total;
 
 	if (!rev)
 		ptr = stack->top;
@@ -71,7 +69,7 @@ int	calc_big_pivot(t_stack *stack, int chunk_size, int median, t_bool rev)
 	long long	total;
 	int		count;
 	t_elem		*ptr;
-	
+
 	if (!rev)
 		ptr = stack->top;
 	else

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/25 21:57:32 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/01 04:31:34 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ typedef struct s_stack {
 	t_elem	*top;
 	t_elem	*bot;
 }		t_stack;
+
+typedef struct	s_chunk_helper {
+	t_stack	*stack;
+	int	size;
+	int	pivot;
+	int	mid2;
+	int	big_chunk;
+	int	small_chunk;
+	int	sub_chunk;
+
+}		t_chunk_helper;
+
+t_chunk_helper	*init_chunk_helper(t_stack *stack, int chunksize);
 
 int	check_args(char **argv);
 
@@ -60,6 +73,7 @@ void	sort_handler_a(t_stack *stack_a, t_stack *stack_b, int chunksize);
 void	sort_handler_a_bot(t_stack *stack_a, t_stack *stack_b, int chunksize);
 void	sort_handler_b(t_stack *stack_a, t_stack *stack_b, int chunksize);
 void	sort_handler_b_bot(t_stack *stack_a, t_stack *stack_b, int chunksize);
+void	quicksort_next(t_stack *stack_a, t_stack *stack_b, t_chunk_helper *chunk_helper, t_bool rev);
 
 int	calc_mid_pivot(t_stack *stack, int chunksize, t_bool rev);
 int	calc_small_pivot(t_stack *stack, int chunksize, int median, t_bool rev);

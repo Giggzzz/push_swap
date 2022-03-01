@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/25 20:11:17 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/01 05:33:35 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_bool	is_sorted_a(t_elem *chunk_start, int chunksize)
 		ptr = ptr->next;
 	}
 	return (TRUE);
-
 }
 
 t_bool	is_sorted_b(t_elem *chunk_start, int chunksize)
@@ -98,7 +97,7 @@ t_bool	is_sorted_b(t_elem *chunk_start, int chunksize)
 	{
 		if (ptr->value < ptr->next->value)
 			return (FALSE);
-		ptr = ptr->next;	
+		ptr = ptr->next;
 	}
 	return (TRUE);
 }
@@ -113,70 +112,6 @@ t_bool	is_sorted_bot(t_elem *chunk_start, int chunksize)
 		if (ptr->value < ptr->prev->value)
 			return (FALSE);
 		ptr = ptr->prev;
-	}
-	return (TRUE);
-
-}
-
-/////
-int	chunk_size_rev(t_stack *stack, t_elem *chunk_end)
-{
-	int	size;
-	t_elem	*ptr;
-
-	if (!stack->bot || !chunk_end)
-		return (0);
-	size = 1;
-	ptr = stack->bot;
-	while (ptr != chunk_end && ptr->prev)
-	{
-		size++;
-		ptr = ptr->prev;
-	}	
-	return (size);
-}
-/////////
-int	chunk_size(t_stack *stack, t_elem *chunk_end)
-{
-	int	size;
-	t_elem	*ptr;
-
-	if (!stack->top || !chunk_end)
-		return (0);
-	size = 1;
-	ptr = stack->top;
-	while (ptr != chunk_end && ptr->next)
-	{
-		size++;
-		ptr = ptr->next;
-	}	
-	return (size);
-}
-
-t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end)
-{
-	t_elem	*ptr;
-
-	ptr = chunk_start;
-	while (ptr->next && ptr != chunk_end)
-	{
-		if (ptr->value > ptr->next->value)
-			return (FALSE);
-		ptr = ptr->next;
-	}
-	return (TRUE);
-}
-
-t_bool	is_rev_sorted(t_elem *chunk_start, t_elem *chunk_end)
-{
-	t_elem	*ptr;
-
-	ptr = chunk_start;
-	while (ptr->next && ptr != chunk_end)
-	{
-		if (ptr->value < ptr->next->value)
-			return (FALSE);
-		ptr = ptr->next;
 	}
 	return (TRUE);
 }

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunk_utils.c                                      :+:      :+:    :+:   */
+/*   compare_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 02:25:35 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/03 16:10:17 by gudias           ###   ########.fr       */
+/*   Created: 2022/03/03 12:46:11 by gudias            #+#    #+#             */
+/*   Updated: 2022/03/03 12:46:55 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_chunk_helper	*init_chunk_helper(t_stack *stack, int chunksize)
+void	compare_2(t_stack *stack)
 {
-	t_chunk_helper	*chunk_helper;
-
-	chunk_helper = malloc (sizeof (t_chunk_helper));
-	if (!chunk_helper)
-		return (NULL);
-	chunk_helper->stack = stack;
-	chunk_helper->size = chunksize;
-	chunk_helper->big_chunk = 0;
-	chunk_helper->small_chunk = 0;
-	chunk_helper->sub_chunk = 0;
-	return (chunk_helper);
+	if (!stack->top || !stack->top->next)
+		return ;
+	if (stack->top->value > stack->top->next->value)
+		swap_stack(stack);
 }

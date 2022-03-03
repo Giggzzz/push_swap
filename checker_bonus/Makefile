@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/02/26 01:21:57 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/03 12:36:46 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= checker_bonus
 
 CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror
-INCL	= -I .
+INCL	= -I ./srcs/
 RM	= rm -f
 
 LIBFT	= ../libft/libft.a
@@ -27,7 +27,7 @@ SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
 
-$(OBJSDIR)/%.o: %.c
+$(OBJSDIR)/%.o: srcs/%.c
 	mkdir -p $(OBJSDIR) $(OBJSDIR)/operations
 	$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 

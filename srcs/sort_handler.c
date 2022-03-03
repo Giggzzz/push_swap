@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:14:57 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 13:58:18 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	sort_handler_a(t_stack *stack_a, t_stack *stack_b, int chunksize)
 		sort_3(stack_a);
 	else if (!is_sorted_a(stack_a->top, chunksize) && chunksize > 0)
 		quicksort_a(stack_a, stack_b, chunksize);
-	
 }
 
 void	sort_handler_a_bot(t_stack *stack_a, t_stack *stack_b, int chunksize)
@@ -38,7 +37,7 @@ void	sort_handler_a_bot(t_stack *stack_a, t_stack *stack_b, int chunksize)
 	else if (is_sorted_bot(stack_a->bot, chunksize))
 	{
 		while (chunksize--)
-			reverse_rotate_stack(stack_a);	
+			reverse_rotate_stack(stack_a);
 	}
 	else if (chunksize > 0)
 		quicksort_a_rev(stack_a, stack_b, chunksize);
@@ -73,7 +72,7 @@ void	sort_handler_b_bot(t_stack *stack_a, t_stack *stack_b, int chunksize)
 			push(stack_a, stack_b);
 		}
 	}
-	else if (chunksize > 0) 
+	else if (chunksize > 0)
 		quicksort_b_rev(stack_a, stack_b, chunksize);
 }
 

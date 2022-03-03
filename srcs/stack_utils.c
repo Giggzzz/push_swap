@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 04:18:33 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:33:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 14:00:14 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_stack	*init_stack(char **values, char id)
 
 int	stack_size(t_stack *stack)
 {
-	int	size;
+	int		size;
 	t_elem	*ptr;
 
 	if (!stack)
@@ -73,50 +73,7 @@ int	stack_size(t_stack *stack)
 	}
 	return (size);
 }
-
-t_bool	is_sorted_a(t_elem *chunk_start, int chunksize)
-{
-	t_elem	*ptr;
-
-	ptr = chunk_start;
-	while (chunksize-- > 1)
-	{
-		if (ptr->value > ptr->next->value)
-			return (FALSE);
-		ptr = ptr->next;
-	}
-	return (TRUE);
-}
-
-t_bool	is_sorted_b(t_elem *chunk_start, int chunksize)
-{
-	t_elem	*ptr;
-
-	ptr = chunk_start;
-	while (chunksize-- > 1)
-	{
-		if (ptr->value < ptr->next->value)
-			return (FALSE);
-		ptr = ptr->next;
-	}
-	return (TRUE);
-}
-
-t_bool	is_sorted_bot(t_elem *chunk_start, int chunksize)
-{
-	t_elem	*ptr;
-
-	ptr = chunk_start;
-	while (chunksize-- > 1)
-	{
-		if (ptr->value < ptr->prev->value)
-			return (FALSE);
-		ptr = ptr->prev;
-	}
-	return (TRUE);
-}
-
-//RM
+/*
 void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	t_elem *elem_a;
@@ -142,5 +99,4 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 			elem_b = elem_b->next;
 	}
 	ft_printf("\n");
-}
-
+}*/

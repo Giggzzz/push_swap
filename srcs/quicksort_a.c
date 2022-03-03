@@ -6,13 +6,13 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:24:24 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 16:19:31 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	subdivide(t_stack *stack_a, t_stack *stack_b, int *curr_size, t_chunk_helper *chunk_helper)
+static void	subdivide(t_stack *a, t_stack *b, int *cur_size, t_chunk *chunk)
 {
 	if (*curr_size  > 0 && chunk_helper->size > 5 && stack_b->top->value < chunk_helper->mid2 && stack_a->top->value >= chunk_helper->pivot)
 	{
@@ -34,7 +34,7 @@ static void	subdivide(t_stack *stack_a, t_stack *stack_b, int *curr_size, t_chun
 void	quicksort_a(t_stack *stack_a, t_stack *stack_b, int chunksize)
 {
 	t_chunk_helper	*chunk_helper;
-	int		curr_size;
+	int			curr_size;
 
 	chunk_helper = init_chunk_helper(stack_a, chunksize);
 	chunk_helper->pivot = calc_mid_pivot(stack_a, chunksize, FALSE);

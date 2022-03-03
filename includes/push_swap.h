@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 04:31:34 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 16:04:28 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,8 @@ t_bool	is_sorted_a(t_elem *chunk_start, int chunksize);
 t_bool	is_sorted_b(t_elem *chunk_start, int chunksize);
 t_bool	is_sorted_bot(t_elem *chunk_start, int chunksize);
 
-
-t_bool	is_sorted(t_elem *chunk_start, t_elem *chunk_end);
-t_bool	is_rev_sorted(t_elem *chunk_start, t_elem *chunk_end);
-int	chunk_size(t_stack *stack, t_elem *chunk_end);
-//
-int	chunk_size_rev(t_stack *stack, t_elem *chunk_end);
-
 //RM
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
-
-//
-void	sort(t_stack *stack_a, t_stack *stack_b, t_elem *chunk_end);
 
 void	compare_2(t_stack *stack);
 void	sort_3(t_stack *stack);
@@ -84,12 +74,6 @@ void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, int chunksize);
 void	quicksort_b(t_stack *stack_a, t_stack *stack_b, int chunksize);
 void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, int chunksize);
 
-/*
-void	quicksort_a(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
-void	quicksort_a_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
-void	quicksort_b(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
-void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, t_elem *pivot);
-*/
 void	swap_stack(t_stack *stack);
 void	swap_both(t_stack *stack_a, t_stack *stack_b);
 void	push(t_stack *dst_stack, t_stack *src_stack);

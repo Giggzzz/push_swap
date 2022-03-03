@@ -6,14 +6,14 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/17 04:34:35 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 12:37:19 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
 # include<stdlib.h>
-# include "../libft/includes/libft.h"
+# include "../../libft/includes/libft.h"
 
 typedef struct s_elem {
 	int		value;

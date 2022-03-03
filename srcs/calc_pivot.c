@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:43:31 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:29:20 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 12:59:13 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	calc_mid_pivot(t_stack *stack, int chunk_size, t_bool rev)
 {
-	int		size;
+	int			size;
 	t_elem		*ptr;
 	long long	total;
 
@@ -37,7 +37,7 @@ int	calc_mid_pivot(t_stack *stack, int chunk_size, t_bool rev)
 
 int	calc_small_pivot(t_stack *stack, int chunk_size, int median, t_bool rev)
 {
-	int		count;
+	int			count;
 	t_elem		*ptr;
 	long long	total;
 
@@ -67,7 +67,7 @@ int	calc_small_pivot(t_stack *stack, int chunk_size, int median, t_bool rev)
 int	calc_big_pivot(t_stack *stack, int chunk_size, int median, t_bool rev)
 {
 	long long	total;
-	int		count;
+	int			count;
 	t_elem		*ptr;
 
 	if (!rev)

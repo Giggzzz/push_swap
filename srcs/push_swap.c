@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:09 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/26 08:22:14 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/03 14:06:59 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		else
 			sort_handler_a(stack_a, stack_b, stack_size(stack_a));
 		free_stack(stack_a);
-		free_stack(stack_b);	
+		free_stack(stack_b);
 	}
 	return (0);
 }

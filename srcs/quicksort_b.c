@@ -6,41 +6,40 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:55:39 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:22:48 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/05 05:46:40 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	subdivide(t_stack *stack_a, t_stack *stack_b, int *curr_size, t_chunk_helper *chunk_helper)
+static void	subdivide(t_stack *a, t_stack *b, int *size, t_chunk_helper *chunk)
 {
-	if (*curr_size  > 0 && chunk_helper->size > 6 && stack_a->top->value < chunk_helper->mid2 && stack_b->top->value < chunk_helper->pivot)
+	if (chunk->size > 6 && a->top->value < chunk->mid2)
 	{
-		rotate_both(stack_a, stack_b);
-		chunk_helper->small_chunk++;
-		chunk_helper->sub_chunk++;
-		(*curr_size)--;
-	}
-	else if (chunk_helper->size > 6 && stack_a->top->value < chunk_helper->mid2)
-	{
-		if (stack_a->top != stack_a->bot)
-			rotate_stack(stack_a);
-		chunk_helper->sub_chunk++;
+		if (*size > 0 && b->top->value < chunk->pivot)
+		{
+			rotate_both(a, b);
+			chunk->small_chunk++;
+			(*size)--;
+		}
+		else
+		{
+			if (a->top != a->bot)
+				rotate_stack(a);
+		}
+		chunk->sub_chunk++;
 	}
 	else
-		chunk_helper->big_chunk++;
+		chunk->big_chunk++;
 }
 
 void	quicksort_b(t_stack *stack_a, t_stack *stack_b, int chunksize)
 {
 	t_chunk_helper	*chunk_helper;
-	int		curr_size;
+	int				curr_size;
 
-	chunk_helper = init_chunk_helper(stack_b, chunksize);
+	chunk_helper = init_chunk_helper(stack_b, chunksize, FALSE);
 	curr_size = chunksize;
-	chunk_helper->pivot = calc_mid_pivot(stack_b, chunksize, FALSE);
-	chunk_helper->mid2 = calc_big_pivot(stack_b, chunksize, chunk_helper->pivot, FALSE);
-
 	while (curr_size--)
 	{
 		if (stack_b->top->value >= chunk_helper->pivot)
@@ -54,5 +53,5 @@ void	quicksort_b(t_stack *stack_a, t_stack *stack_b, int chunksize)
 			chunk_helper->small_chunk++;
 		}
 	}
-	quicksort_next(stack_a, stack_b, chunk_helper, FALSE);
+	quicksort_next(stack_a, stack_b, chunk_helper);
 }

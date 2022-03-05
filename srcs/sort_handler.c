@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/03 13:58:18 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/05 05:46:15 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,19 @@ void	sort_handler_b_bot(t_stack *stack_a, t_stack *stack_b, int chunksize)
 		quicksort_b_rev(stack_a, stack_b, chunksize);
 }
 
-void	quicksort_next(t_stack *stack_a, t_stack *stack_b, t_chunk_helper *chunk_helper, t_bool rev)
+void	quicksort_next(t_stack *a, t_stack *b, t_chunk_helper *chunk_helper)
 {
-	if (chunk_helper->stack->id == 'A' && !rev)
-		sort_handler_a_bot(stack_a, stack_b, chunk_helper->big_chunk);
+	if (chunk_helper->stack->id == 'A' && !chunk_helper->rev)
+		sort_handler_a_bot(a, b, chunk_helper->big_chunk);
 	else
-		sort_handler_a(stack_a, stack_b, chunk_helper->big_chunk);
+		sort_handler_a(a, b, chunk_helper->big_chunk);
 	if (chunk_helper->stack->id == 'A')
-		sort_handler_b(stack_a, stack_b, chunk_helper->sub_chunk);
+		sort_handler_b(a, b, chunk_helper->sub_chunk);
 	else
-		sort_handler_a_bot(stack_a, stack_b, chunk_helper->sub_chunk);
-	if (chunk_helper->stack->id != 'A' && rev)
-		sort_handler_b(stack_a, stack_b, chunk_helper->small_chunk);
+		sort_handler_a_bot(a, b, chunk_helper->sub_chunk);
+	if (chunk_helper->stack->id != 'A' && chunk_helper->rev)
+		sort_handler_b(a, b, chunk_helper->small_chunk);
 	else
-		sort_handler_b_bot(stack_a, stack_b, chunk_helper->small_chunk);
+		sort_handler_b_bot(a, b, chunk_helper->small_chunk);
 	free (chunk_helper);
 }

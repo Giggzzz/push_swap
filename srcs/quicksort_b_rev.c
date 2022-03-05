@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:55:39 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/01 05:34:52 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/05 05:47:00 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ static void	subdivide(t_stack *stack_a, t_chunk_helper *chunk_helper)
 void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, int chunksize)
 {
 	t_chunk_helper	*chunk_helper;
-	int		curr_size;
+	int				curr_size;
 
-	chunk_helper = init_chunk_helper(stack_b, chunksize);
+	chunk_helper = init_chunk_helper(stack_b, chunksize, TRUE);
 	curr_size = chunksize;
-	chunk_helper->pivot = calc_mid_pivot(stack_b, curr_size, TRUE);
-	chunk_helper->mid2 = calc_big_pivot(stack_b, curr_size, chunk_helper->pivot, TRUE);
 	while (curr_size--)
 	{
 		reverse_rotate_stack(stack_b);
@@ -44,5 +42,5 @@ void	quicksort_b_rev(t_stack *stack_a, t_stack *stack_b, int chunksize)
 		else
 			chunk_helper->small_chunk++;
 	}
-	quicksort_next(stack_a, stack_b, chunk_helper, TRUE);
+	quicksort_next(stack_a, stack_b, chunk_helper);
 }	

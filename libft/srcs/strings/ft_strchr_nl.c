@@ -6,13 +6,13 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:00:17 by gudias            #+#    #+#             */
-/*   Updated: 2022/01/14 20:12:59 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/07 15:25:04 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr_nl(char *str)
 {
 	while (*str && *str != '\n')
-	str++;
+		str++;
 	return (str);
 }

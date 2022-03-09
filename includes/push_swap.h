@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:54:45 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 06:05:43 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 18:20:30 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,14 @@ typedef struct s_chunk_helper {
 	int		mid2;
 	int		big_chunk;
 	int		small_chunk;
-	int		sub_chunk;
+	int		mid_chunk;
 
 }		t_chunk_helper;
 
 t_chunk_helper	*init_chunk_helper(t_stack *stack, int chunksize, t_bool rev);
-
 int				check_args(char **argv);
-
 void			free_stack(t_stack *stack);
 t_stack			*init_stack(char **values, char id);
-
 int				stack_size(t_stack *stack);
 
 t_bool			is_sorted_a(t_elem *chunk_start, int chunksize);

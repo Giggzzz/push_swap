@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 05:46:15 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:21:55 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	quicksort_next(t_stack *a, t_stack *b, t_chunk_helper *chunk_helper)
 	else
 		sort_handler_a(a, b, chunk_helper->big_chunk);
 	if (chunk_helper->stack->id == 'A')
-		sort_handler_b(a, b, chunk_helper->sub_chunk);
+		sort_handler_b(a, b, chunk_helper->mid_chunk);
 	else
-		sort_handler_a_bot(a, b, chunk_helper->sub_chunk);
+		sort_handler_a_bot(a, b, chunk_helper->mid_chunk);
 	if (chunk_helper->stack->id != 'A' && chunk_helper->rev)
 		sort_handler_b(a, b, chunk_helper->small_chunk);
 	else

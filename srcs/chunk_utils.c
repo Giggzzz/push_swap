@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 02:25:35 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 05:44:34 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:19:16 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_chunk_helper	*init_chunk_helper(t_stack *stack, int chunksize, t_bool rev)
 	chunk->size = chunksize;
 	chunk->big_chunk = 0;
 	chunk->small_chunk = 0;
-	chunk->sub_chunk = 0;
+	chunk->mid_chunk = 0;
 	chunk->pivot = calc_mid_pivot(stack, chunksize, rev);
 	if (stack->id == 'A')
 		chunk->mid2 = calc_small_pivot(stack, chunksize, chunk->pivot, rev);

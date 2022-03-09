@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:55:39 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 05:46:40 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:20:30 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	subdivide(t_stack *a, t_stack *b, int *size, t_chunk_helper *chunk)
 			if (a->top != a->bot)
 				rotate_stack(a);
 		}
-		chunk->sub_chunk++;
+		chunk->mid_chunk++;
 	}
 	else
 		chunk->big_chunk++;

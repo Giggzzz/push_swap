@@ -6,30 +6,27 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/03/05 06:06:21 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/09 18:16:55 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
-CC	= gcc
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 INCL	= -I includes
-RM	= rm -f
+RM		= rm -f
 
 LIBFT	= libft/libft.a
 
 SRCSDIR	= srcs
 OBJSDIR	= objs
 
-SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
-	operations/reverse_rotate.c \
-	push_swap.c stack_utils.c check_args.c sort_3.c \
-	memfree.c \
-	quicksort_a.c quicksort_a_rev.c quicksort_b.c quicksort_b_rev.c \
-	sort_handler.c calc_pivot.c chunk_utils.c compare_2.c is_sorted.c	
-#sort.c \ 
-
+SRCS 	= 	operations/swap.c operations/push.c operations/rotate.c \
+			operations/reverse_rotate.c push_swap.c stack_utils.c \
+			check_args.c sort_3.c memfree.c sort_handler.c calc_pivot.c \
+			chunk_utils.c compare_2.c is_sorted.c \
+			quicksort_a.c quicksort_a_rev.c quicksort_b.c quicksort_b_rev.c \
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
 

@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:38:10 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 05:46:27 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:20:03 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	subdivide(t_stack *a, t_stack *b, int *size, t_chunk_helper *chunk)
 		chunk->small_chunk++;
 	}
 	else
-		chunk->sub_chunk++;
+		chunk->mid_chunk++;
 }
 
 void	quicksort_a(t_stack *stack_a, t_stack *stack_b, int chunksize)

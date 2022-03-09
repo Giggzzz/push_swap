@@ -6,7 +6,7 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 08:55:39 by gudias            #+#    #+#             */
-/*   Updated: 2022/03/05 05:47:00 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:21:11 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	subdivide(t_stack *stack_a, t_chunk_helper *chunk_helper)
 {
 	if (chunk_helper->size > 6 && stack_a->top->value < chunk_helper->mid2)
 	{
-		chunk_helper->sub_chunk++;
+		chunk_helper->mid_chunk++;
 		if (stack_a->top != stack_a->bot)
 			rotate_stack(stack_a);
 	}

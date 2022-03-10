@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/03/09 18:16:55 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/10 12:46:15 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS 	= 	operations/swap.c operations/push.c operations/rotate.c \
 			chunk_utils.c compare_2.c is_sorted.c \
 			quicksort_a.c quicksort_a_rev.c quicksort_b.c quicksort_b_rev.c \
 
-OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
+OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o) 
 
 $(OBJSDIR)/%.o:	srcs/%.c
 	mkdir -p $(OBJSDIR) $(OBJSDIR)/operations
@@ -44,10 +44,17 @@ $(LIBFT):
 
 clean: 
 	$(RM) -r $(OBJSDIR)
+	make clean -C libft
+	make clean -C checker_bonus
 
 fclean: clean
 	$(RM) $(NAME)
+	make fclean -C libft
+	make fclean -C checker_bonus
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus:
+	make -C checker_bonus
+
+.PHONY: all clean fclean re bonus

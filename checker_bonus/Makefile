@@ -6,26 +6,26 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/03/03 12:36:46 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/10 12:42:19 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= checker_bonus
+NAME	= ../checker
 
-CC	= gcc
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 INCL	= -I ./srcs/
-RM	= rm -f
+RM		= rm -f
 
 LIBFT	= ../libft/libft.a
 
 OBJSDIR	= objs
 
-SRCS = 	operations/swap.c operations/push.c operations/rotate.c \
-	operations/reverse_rotate.c \
-	stack_utils.c check_args.c checker.c
+SRCS	= 	operations/swap.c operations/push.c operations/rotate.c \
+			operations/reverse_rotate.c \
+			stack_utils.c check_args.c checker.c
 
-OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o) 
+OBJS	= $(SRCS:%.c=$(OBJSDIR)/%.o) 
 
 $(OBJSDIR)/%.o: srcs/%.c
 	mkdir -p $(OBJSDIR) $(OBJSDIR)/operations

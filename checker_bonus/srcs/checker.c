@@ -6,11 +6,17 @@
 /*   By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 01:42:49 by gudias            #+#    #+#             */
-/*   Updated: 2022/02/17 04:58:23 by gudias           ###   ########.fr       */
+/*   Updated: 2022/03/10 12:55:54 by gudias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+static void	err_quit(void)
+{
+	ft_putendl("Error");
+	exit(0);
+}
 
 static void	do_operation(char *ops, t_stack *stack_a, t_stack *stack_b)
 {
@@ -36,6 +42,8 @@ static void	do_operation(char *ops, t_stack *stack_a, t_stack *stack_b)
 		reverse_rotate(stack_b);
 	else if (!ft_strncmp(ops, "rrr\n", 4))
 		reverse_rotate_both(stack_a, stack_b);
+	else
+		err_quit();
 }
 
 static void	try_sort(t_stack *stack_a, t_stack *stack_b)

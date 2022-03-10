@@ -6,7 +6,7 @@
 #    By: gudias <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 03:22:27 by gudias            #+#    #+#              #
-#    Updated: 2022/03/10 12:42:19 by gudias           ###   ########.fr        #
+#    Updated: 2022/03/10 13:17:29 by gudias           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(LIBFT):
-	make -C libft
+	make -C ../libft
 
 clean: 
 	$(RM) -r $(OBJSDIR)
